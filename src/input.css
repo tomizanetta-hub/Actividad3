@@ -1,0 +1,122 @@
+/* ==========================================================
+   Ruta Gol — Design System en Tailwind CSS v4
+   Este archivo es la fuente de estilos. Se compila con:
+     npm run build   (genera css/styles.css)
+     npm run dev     (recompila automáticamente al guardar)
+   ========================================================== */
+@import "tailwindcss";
+
+/* Tailwind escanea estos archivos para generar solo las clases usadas */
+@source "../*.html";
+@source "../js/*.js";
+
+/* ---------- Tokens del Design System ---------- */
+@theme {
+  /* Tipografía: títulos sans serif en negrita, lectura sans serif regular */
+  --font-display: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Neutros: texto oscuro sobre fondo claro */
+  --color-tinta: #0f172a;      /* texto principal */
+  --color-tinta-suave: #475569;/* texto secundario (contraste 7,5:1 sobre blanco) */
+  --color-fondo: #f8fafc;      /* fondo general */
+  --color-superficie: #ffffff; /* tarjetas */
+  --color-borde: #cbd5e1;
+
+  /* Color de marca (verde cancha) para botones y enlaces */
+  --color-cancha: #14532d;
+  --color-cancha-claro: #dcfce7;
+  --color-acento: #16a34a;
+
+  /* Color de referencia de cada parada */
+  --color-racing: #75aadb;     /* celeste — se usa con texto oscuro */
+  --color-racing-osc: #1e5a8a;
+  --color-boca: #f5b800;       /* amarillo — se usa con texto oscuro */
+  --color-boca-osc: #103f79;
+  --color-ferro: #15803d;      /* verde — admite texto blanco */
+  --color-ferro-osc: #14532d;
+  --color-river: #c8102e;      /* rojo — admite texto blanco */
+  --color-river-osc: #8f0b21;
+
+  /* Estados */
+  --color-error: #b91c1c;
+  --color-error-fondo: #fef2f2;
+  --color-exito: #166534;
+  --color-exito-fondo: #f0fdf4;
+
+  --radius-tarjeta: 1rem;
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  body { @apply bg-fondo text-tinta font-sans antialiased; }
+  h1, h2, h3, h4 { @apply font-display font-extrabold tracking-tight text-balance; }
+
+  /* Indicador de foco visible y consistente en todo el sitio */
+  :focus-visible {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* ---------- Componentes reutilizables (utilidades propias de Tailwind v4) ---------- */
+@utility contenedor { @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8; }
+
+/* Botones */
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5
+         font-semibold transition-colors duration-150 cursor-pointer
+         disabled:cursor-not-allowed disabled:opacity-60;
+}
+@utility btn-primario { @apply btn bg-cancha text-white hover:bg-acento; }
+@utility btn-secundario { @apply btn border-2 border-cancha bg-white text-cancha hover:bg-cancha-claro; }
+
+/* Tarjetas */
+@utility tarjeta { @apply rounded-tarjeta border border-borde bg-superficie shadow-sm; }
+
+/* Etiqueta de parada (número + color) */
+@utility chip { @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold; }
+
+/* Formularios */
+@utility campo-label { @apply mb-1.5 block font-semibold; }
+@utility campo {
+  @apply block w-full min-h-11 rounded-lg border-2 border-borde bg-white px-3 py-2 text-base text-tinta
+         placeholder:text-slate-500 focus:border-cancha focus:outline-none;
+  &[aria-invalid="true"] { @apply border-error bg-error-fondo; }
+}
+@utility campo-ayuda { @apply mt-1 text-sm text-tinta-suave; }
+@utility campo-error {
+  @apply mt-1 flex items-start gap-1.5 text-sm font-semibold text-error;
+  &:empty { @apply hidden; }
+}
+
+/* Enlaces dentro de texto */
+@utility enlace { @apply font-semibold text-cancha underline decoration-2 underline-offset-2 hover:text-acento; }
+
+/* Navegación: el enlace activo se marca con subrayado, no solo con color */
+@utility nav-link {
+  @apply rounded-md px-3 py-2 font-semibold text-tinta hover:bg-cancha-claro;
+  &[aria-current="page"] { @apply underline decoration-acento decoration-[3px] underline-offset-8; }
+}
+
+@utility titulo-seccion { @apply text-3xl sm:text-4xl; }
+@utility bajada { @apply mt-3 max-w-2xl text-lg text-tinta-suave; }
+
+/* Marcadores numerados del mapa (Leaflet) */
+.marcador-ruta {
+  display: grid; place-items: center;
+  width: 36px; height: 36px; border-radius: 9999px;
+  border: 3px solid #fff; box-shadow: 0 2px 6px rgb(0 0 0 / .35);
+  font: 800 16px/1 var(--font-display);
+}
+.leaflet-container { font-family: var(--font-sans); z-index: 0; }
+.leaflet-popup-content a { color: var(--color-cancha); font-weight: 600; }
+
+/* Imagen que no cargó: se muestra un fondo con el texto alternativo */
+.img-fallback { background: repeating-linear-gradient(45deg, #e2e8f0 0 12px, #f1f5f9 12px 24px); }
