@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Ruta Gol</title>
+  <meta name="description" content="Enviá tu consulta sobre el recorrido Ruta Gol, las reservas o la accesibilidad de las visitas.">
+  <meta name="theme-color" content="#14532d">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/datos.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/validacion.js" defer></script>
+  <script src="js/contacto.js" defer></script>
+  <script src="js/asistente.js" defer></script>
+</head>
+<body class="min-h-screen">
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:font-bold focus:shadow-lg">Saltar al contenido principal</a>
+  <header class="sticky top-0 z-40 border-b border-borde bg-white/95 backdrop-blur">
+    <div class="contenedor flex h-16 items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2 rounded-md" aria-label="Ruta Gol, ir al inicio"><svg class="size-10 shrink-0" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <circle cx="24" cy="24" r="22" fill="#14532d"/>
+  <path d="M9 33 C 16 22, 26 34, 39 15" fill="none" stroke="#f5b800" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6"/>
+  <circle cx="24" cy="24" r="9" fill="#fff"/>
+  <path d="M24 18.5l4.6 3.3-1.8 5.4h-5.6l-1.8-5.4z" fill="#0f172a"/>
+  <circle cx="39" cy="15" r="3.5" fill="#c8102e" stroke="#fff" stroke-width="1.5"/>
+</svg>
+      <span class="flex flex-col leading-none">
+        <span class="font-display text-lg font-black tracking-wide">RUTA</span>
+        <span class="font-display text-lg font-black tracking-wide text-acento">GOL</span>
+      </span></a>
+      <nav aria-label="Principal" class="hidden md:block">
+        <ul class="flex items-center gap-1">
+          <li><a class="nav-link" href="index.html">Inicio</a></li>
+          <li><a class="nav-link" href="index.html#recorrido">Recorrido</a></li>
+          <li><a class="nav-link" href="index.html#paradas">Estadios</a></li>
+          <li><a class="nav-link" href="index.html#preguntas">Preguntas</a></li>
+          <li><a class="nav-link" href="contacto.html" aria-current="page">Contacto</a></li>
+          <li><a class="btn-primario ml-2" href="reservas.html">Reservar</a></li>
+        </ul>
+      </nav>
+      <button id="btn-menu" type="button" class="btn-secundario px-4 md:hidden" aria-expanded="false" aria-controls="menu-movil">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span data-texto>Menú</span>
+      </button>
+    </div>
+    <nav id="menu-movil" aria-label="Principal (móvil)" class="border-t border-borde bg-white md:hidden" hidden>
+      <ul class="contenedor py-3">
+          <li><a class="nav-link block py-3" href="index.html">Inicio</a></li>
+          <li><a class="nav-link block py-3" href="index.html#recorrido">Recorrido</a></li>
+          <li><a class="nav-link block py-3" href="index.html#paradas">Estadios</a></li>
+          <li><a class="nav-link block py-3" href="index.html#preguntas">Preguntas</a></li>
+          <li><a class="nav-link block py-3" href="contacto.html" aria-current="page">Contacto</a></li>
+          <li><a class="btn-primario mt-2 w-full" href="reservas.html">Reservar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <section class="bg-cancha py-12 text-white" aria-labelledby="titulo-contacto">
+      <div class="contenedor">
+        <nav aria-label="Ubicación en el sitio" class="text-sm text-cancha-claro"><a class="underline" href="index.html">Inicio</a> › <span aria-current="page">Contacto</span></nav>
+        <h1 id="titulo-contacto" class="mt-3 text-4xl sm:text-5xl">Contacto</h1>
+        <p class="mt-3 max-w-2xl text-lg text-cancha-claro">¿Tenés una consulta sobre el recorrido, una reserva o la accesibilidad de una visita? Escribinos.</p>
+      </div>
+    </section>
+
+    <div class="contenedor grid gap-10 py-12 lg:grid-cols-[2fr_1fr]">
+      <div>
+        <p class="tarjeta mb-6 flex gap-3 border-l-8 border-l-boca p-4"><svg class="size-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span><strong>Simulación:</strong> este formulario valida los datos y confirma el envío, pero no transmite el mensaje a ningún servidor.</span></p>
+
+        <div id="exito-contacto" class="tarjeta mb-6 flex gap-4 border-2 border-exito bg-exito-fondo p-5" tabindex="-1" role="status" hidden>
+          <span class="grid size-10 shrink-0 place-items-center rounded-full bg-exito text-white"><svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5L20 7"/></svg></span>
+          <div><h2 class="text-xl">¡Consulta enviada!</h2><p class="mt-1" data-detalle></p></div>
+        </div>
+
+        <form id="form-contacto" class="tarjeta space-y-6 p-6 sm:p-8" novalidate>
+          <div id="errores-contacto" class="rounded-xl border-2 border-error bg-error-fondo p-5 text-error" tabindex="-1" role="alert" hidden></div>
+          <p class="text-sm text-tinta-suave">Todos los campos son obligatorios.</p>
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label for="nombre" class="campo-label">Nombre</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="name" class="campo" required aria-describedby="error-nombre" >
+              
+              <p id="error-nombre" class="campo-error" aria-live="polite"></p>
+            </div>
+            <div>
+              <label for="email" class="campo-label">Correo electrónico</label>
+              <input id="email" name="email" type="email" autocomplete="email" class="campo" required aria-describedby="ayuda-email error-email" >
+              <p id="ayuda-email" class="campo-ayuda">Ej.: nombre@correo.com</p>
+              <p id="error-email" class="campo-error" aria-live="polite"></p>
+            </div>
+          </div>
+          <div>
+            <label for="motivo" class="campo-label">Motivo de la consulta</label>
+            <select id="motivo" name="motivo" class="campo" required aria-describedby="error-motivo">
+              <option value="">Elegí una opción</option>
+              <option value="paquetes">Paquetes y precios</option>
+              <option value="reserva">Una reserva realizada</option>
+              <option value="accesibilidad">Accesibilidad</option>
+              <option value="grupos">Grupos y escuelas</option>
+              <option value="sugerencia">Sugerencias sobre el sitio</option>
+              <option value="otro">Otro motivo</option>
+            </select>
+            <p id="error-motivo" class="campo-error" aria-live="polite"></p>
+          </div>
+          <div>
+            <label for="mensaje" class="campo-label">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="6" maxlength="600" class="campo" required aria-describedby="contador-mensaje error-mensaje"></textarea>
+            <p id="contador-mensaje" class="campo-ayuda" aria-live="off">0 / 600 caracteres</p>
+            <p id="error-mensaje" class="campo-error" aria-live="polite"></p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button type="submit" class="btn-primario px-8">Enviar consulta</button>
+            <button type="reset" class="btn-secundario">Limpiar</button>
+          </div>
+        </form>
+      </div>
+
+      <aside class="space-y-6" aria-label="Otras formas de obtener ayuda">
+        <div class="tarjeta p-6">
+          <h2 class="text-xl">¿Necesitás una respuesta rápida?</h2>
+          <p class="mt-2 text-tinta-suave">El asistente responde al instante sobre precios, horarios, transporte y cada estadio.</p>
+          <button type="button" data-abrir-asistente class="btn-primario mt-4 w-full"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4z"/></svg> Preguntar al asistente</button>
+        </div>
+        <div class="tarjeta p-6">
+          <h2 class="text-xl">Tiempo de respuesta</h2>
+          <p class="mt-2 text-tinta-suave">Respondemos dentro de las 48 horas hábiles. Para cambios en una reserva, incluí tu código (empieza con RG-).</p>
+        </div>
+        <div class="tarjeta p-6">
+          <h2 class="text-xl">Información oficial</h2>
+          <p class="mt-2 text-tinta-suave">Horarios, entradas y visitas dependen de cada club:</p>
+          <ul class="mt-3 space-y-2">
+            <li><a class="enlace" href="https://www.racingclub.com.ar/estadio" target="_blank" rel="noopener">Racing Club<span class="sr-only"> (abre en otra pestaña)</span></a></li>
+            <li><a class="enlace" href="https://www.bocajuniors.com.ar/la-bombonera" target="_blank" rel="noopener">Boca Juniors<span class="sr-only"> (abre en otra pestaña)</span></a></li>
+            <li><a class="enlace" href="https://www.ferrocarriloeste.org.ar/estadio/" target="_blank" rel="noopener">Ferro Carril Oeste<span class="sr-only"> (abre en otra pestaña)</span></a></li>
+            <li><a class="enlace" href="https://www.riverplate.com/museo" target="_blank" rel="noopener">Museo River<span class="sr-only"> (abre en otra pestaña)</span></a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="mt-20 bg-tinta text-slate-200">
+    <div class="contenedor grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <div class="flex items-center gap-2 text-white"><svg class="size-10 shrink-0" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <circle cx="24" cy="24" r="22" fill="#14532d"/>
+  <path d="M9 33 C 16 22, 26 34, 39 15" fill="none" stroke="#f5b800" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6"/>
+  <circle cx="24" cy="24" r="9" fill="#fff"/>
+  <path d="M24 18.5l4.6 3.3-1.8 5.4h-5.6l-1.8-5.4z" fill="#0f172a"/>
+  <circle cx="39" cy="15" r="3.5" fill="#c8102e" stroke="#fff" stroke-width="1.5"/>
+</svg><span class="font-display text-xl font-black">RUTA GOL</span></div>
+        <p class="mt-3 text-sm">Cuatro estadios de Buenos Aires y Avellaneda como parte de una misma experiencia urbana.</p>
+      </div>
+      <nav aria-label="Estadios del recorrido">
+        <h2 class="font-display text-base font-extrabold text-white">Paradas</h2>
+        <ol class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:underline" href="cilindro.html">1. El Cilindro — Racing</a></li>
+          <li><a class="hover:underline" href="bombonera.html">2. La Bombonera — Boca</a></li>
+          <li><a class="hover:underline" href="ferro.html">3. El Templo de Caballito — Ferro</a></li>
+          <li><a class="hover:underline" href="monumental.html">4. Más Monumental — River</a></li>
+        </ol>
+      </nav>
+      <nav aria-label="Secciones del sitio">
+        <h2 class="font-display text-base font-extrabold text-white">El sitio</h2>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:underline" href="index.html#recorrido">Mapa del recorrido</a></li>
+          <li><a class="hover:underline" href="reservas.html">Reservar una experiencia</a></li>
+          <li><a class="hover:underline" href="index.html#preguntas">Preguntas frecuentes</a></li>
+          <li><a class="hover:underline" href="contacto.html">Contacto</a></li>
+          <li><a class="hover:underline" href="design-system.html">Design System</a></li>
+        </ul>
+      </nav>
+      <div class="text-sm">
+        <h2 class="font-display text-base font-extrabold text-white">Proyecto académico</h2>
+        <p class="mt-3">Diseño y Desarrollo Web · Grupo 9: Tomás Zanetta, Lucas Pistolesi, Mateo Marchetti y Tomás Martinez Menghi.</p>
+        <p class="mt-2">Precios y reservas simulados. Fotos: Wikimedia Commons (créditos en cada imagen). Mapas: © OpenStreetMap.</p>
+      </div>
+    </div>
+    <p class="border-t border-slate-700 py-4 text-center text-xs">© <span id="anio">2026</span> Ruta Gol · Sitio sin fines comerciales, no afiliado a los clubes.</p>
+  </footer>
+
+  <div class="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
+    <section id="panel-asistente" role="dialog" aria-modal="false" aria-labelledby="titulo-asistente" class="flex h-[min(32rem,75vh)] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-borde bg-fondo shadow-2xl" hidden>
+      <div class="flex items-center justify-between gap-2 bg-cancha px-4 py-3 text-white">
+        <div>
+          <h2 id="titulo-asistente" class="font-display text-lg font-extrabold">Asistente Ruta Gol</h2>
+          <p class="text-xs text-cancha-claro">Respuestas automáticas a preguntas frecuentes</p>
+        </div>
+        <button type="button" data-cerrar class="grid size-11 place-items-center rounded-full hover:bg-white/15" aria-label="Cerrar asistente">
+          <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="chat-mensajes" class="flex flex-1 flex-col gap-2 overflow-y-auto p-3" role="log" aria-live="polite" aria-label="Conversación"></div>
+      <form class="flex gap-2 border-t border-borde bg-white p-3" novalidate>
+        <label for="chat-entrada" class="sr-only">Escribí tu pregunta</label>
+        <input id="chat-entrada" type="text" autocomplete="off" maxlength="200" class="campo min-h-11 flex-1" placeholder="Ej.: ¿cuánto cuesta?">
+        <button type="submit" class="btn-primario px-4">Enviar</button>
+      </form>
+    </section>
+    <button id="btn-asistente" type="button" class="btn-primario shadow-lg" aria-expanded="false" aria-controls="panel-asistente">
+      <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4z"/></svg><span>¿Dudas? Preguntá</span>
+    </button>
+  </div>
+</body>
+</html>
