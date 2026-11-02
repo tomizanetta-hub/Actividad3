@@ -108,7 +108,7 @@ const REGLAS = {
 // Tipo de cambio de respaldo: se usa solo si las dos APIs fallan.
 // ACTUALIZAR este valor antes de entregar con la cotización del día.
 const TIPO_CAMBIO_RESPALDO = {
-  venta: 1450,
-  fecha: "2026-11-01",
+  venta: 1560,
+  fecha: "2026-11-02",
   fuente: "Valor de respaldo cargado manualmente (dólar oficial BNA, venta)",
 };
