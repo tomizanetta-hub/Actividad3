@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System — Ruta Gol</title>
+  <meta name="description" content="Colores, tipografía y componentes del Design System de Ruta Gol.">
+  <meta name="theme-color" content="#14532d">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/datos.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/asistente.js" defer></script>
+</head>
+<body class="min-h-screen">
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:font-bold focus:shadow-lg">Saltar al contenido principal</a>
+  <header class="sticky top-0 z-40 border-b border-borde bg-white/95 backdrop-blur">
+    <div class="contenedor flex h-16 items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2 rounded-md" aria-label="Ruta Gol, ir al inicio"><svg class="size-10 shrink-0" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <circle cx="24" cy="24" r="22" fill="#14532d"/>
+  <path d="M9 33 C 16 22, 26 34, 39 15" fill="none" stroke="#f5b800" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6"/>
+  <circle cx="24" cy="24" r="9" fill="#fff"/>
+  <path d="M24 18.5l4.6 3.3-1.8 5.4h-5.6l-1.8-5.4z" fill="#0f172a"/>
+  <circle cx="39" cy="15" r="3.5" fill="#c8102e" stroke="#fff" stroke-width="1.5"/>
+</svg>
+      <span class="flex flex-col leading-none">
+        <span class="font-display text-lg font-black tracking-wide">RUTA</span>
+        <span class="font-display text-lg font-black tracking-wide text-acento">GOL</span>
+      </span></a>
+      <nav aria-label="Principal" class="hidden md:block">
+        <ul class="flex items-center gap-1">
+          <li><a class="nav-link" href="index.html">Inicio</a></li>
+          <li><a class="nav-link" href="index.html#recorrido">Recorrido</a></li>
+          <li><a class="nav-link" href="index.html#paradas">Estadios</a></li>
+          <li><a class="nav-link" href="index.html#preguntas">Preguntas</a></li>
+          <li><a class="nav-link" href="contacto.html">Contacto</a></li>
+          <li><a class="btn-primario ml-2" href="reservas.html">Reservar</a></li>
+        </ul>
+      </nav>
+      <button id="btn-menu" type="button" class="btn-secundario px-4 md:hidden" aria-expanded="false" aria-controls="menu-movil">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span data-texto>Menú</span>
+      </button>
+    </div>
+    <nav id="menu-movil" aria-label="Principal (móvil)" class="border-t border-borde bg-white md:hidden" hidden>
+      <ul class="contenedor py-3">
+          <li><a class="nav-link block py-3" href="index.html">Inicio</a></li>
+          <li><a class="nav-link block py-3" href="index.html#recorrido">Recorrido</a></li>
+          <li><a class="nav-link block py-3" href="index.html#paradas">Estadios</a></li>
+          <li><a class="nav-link block py-3" href="index.html#preguntas">Preguntas</a></li>
+          <li><a class="nav-link block py-3" href="contacto.html">Contacto</a></li>
+          <li><a class="btn-primario mt-2 w-full" href="reservas.html">Reservar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <section class="bg-cancha py-12 text-white" aria-labelledby="titulo-ds">
+      <div class="contenedor">
+        <h1 id="titulo-ds" class="text-4xl sm:text-5xl">Design System</h1>
+        <p class="mt-3 max-w-2xl text-lg text-cancha-claro">Tokens y componentes de Ruta Gol tal como están implementados con Tailwind CSS (archivo <code>src/input.css</code>).</p>
+      </div>
+    </section>
+    <div class="contenedor space-y-16 py-12">
+      <section aria-labelledby="ds-color"><h2 id="ds-color" class="titulo-seccion">Color</h2>
+        <h3 class="mt-6 text-xl">Neutros y marca</h3>
+        <ul class="mt-3 grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-tinta text-white grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">Tinta</p><p class="font-mono text-tinta-suave">#0f172a · <code>tinta</code></p><p class="mt-1 text-tinta-suave">Texto principal, pie</p></div></li>
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-tinta-suave text-white grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">Tinta suave</p><p class="font-mono text-tinta-suave">#475569 · <code>tinta-suave</code></p><p class="mt-1 text-tinta-suave">Texto secundario</p></div></li>
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-fondo text-tinta grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">Fondo</p><p class="font-mono text-tinta-suave">#f8fafc · <code>fondo</code></p><p class="mt-1 text-tinta-suave">Fondo general</p></div></li>
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-cancha text-white grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">Cancha</p><p class="font-mono text-tinta-suave">#14532d · <code>cancha</code></p><p class="mt-1 text-tinta-suave">Botones, enlaces, portada</p></div></li>
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-acento text-white grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">Acento</p><p class="font-mono text-tinta-suave">#16a34a · <code>acento</code></p><p class="mt-1 text-tinta-suave">Hover, foco, detalles</p></div></li>
+        </ul>
+        <h3 class="mt-8 text-xl">Color de cada parada</h3>
+        <p class="mt-1 text-tinta-suave">Siempre acompañado del número de parada: el color nunca es la única pista.</p>
+        <ul class="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-racing text-tinta grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">1 · Racing (celeste)</p><p class="font-mono text-tinta-suave">#75aadb · <code>racing</code></p><p class="mt-1 text-tinta-suave">Con texto oscuro</p></div></li>
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-boca text-tinta grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">2 · Boca (amarillo)</p><p class="font-mono text-tinta-suave">#f5b800 · <code>boca</code></p><p class="mt-1 text-tinta-suave">Con texto oscuro</p></div></li>
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-ferro text-white grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">3 · Ferro (verde)</p><p class="font-mono text-tinta-suave">#15803d · <code>ferro</code></p><p class="mt-1 text-tinta-suave">Con texto blanco</p></div></li>
+          <li class="tarjeta overflow-hidden"><div class="h-20 bg-river text-white grid place-items-center font-bold">Aa</div><div class="p-3 text-sm"><p class="font-bold">4 · River (rojo)</p><p class="font-mono text-tinta-suave">#c8102e · <code>river</code></p><p class="mt-1 text-tinta-suave">Con texto blanco</p></div></li>
+        </ul>
+      </section>
+      <section aria-labelledby="ds-tipo"><h2 id="ds-tipo" class="titulo-seccion">Tipografía</h2>
+        <div class="tarjeta mt-6 space-y-4 p-6">
+          <p class="font-display text-5xl font-extrabold">Archivo ExtraBold — Títulos</p>
+          <p class="font-display text-3xl font-extrabold">H2 · 30–36 px</p>
+          <p class="font-display text-xl font-extrabold">H3 · 20 px</p>
+          <p class="text-lg">Inter Regular 18 px — bajadas y texto destacado.</p>
+          <p>Inter Regular 16 px — texto de lectura. Interlineado amplio para lectura cómoda.</p>
+          <p class="text-sm text-tinta-suave">Inter 14 px — ayudas, créditos de fotos y notas.</p>
+        </div>
+      </section>
+      <section aria-labelledby="ds-comp"><h2 id="ds-comp" class="titulo-seccion">Componentes</h2>
+        <div class="mt-6 grid gap-6 lg:grid-cols-2">
+          <div class="tarjeta p-6"><h3 class="text-xl">Botones</h3><p class="mt-1 text-sm text-tinta-suave">Altura mínima 44 px (área táctil cómoda). Clases <code>btn-primario</code> y <code>btn-secundario</code>.</p>
+            <div class="mt-4 flex flex-wrap gap-3"><button class="btn-primario" type="button">Primario</button><button class="btn-secundario" type="button">Secundario</button><button class="btn-primario" type="button" disabled>Deshabilitado</button></div></div>
+          <div class="tarjeta p-6"><h3 class="text-xl">Etiquetas de parada</h3><p class="mt-1 text-sm text-tinta-suave">Clase <code>chip</code> + color de la parada.</p>
+            <div class="mt-4 flex flex-wrap gap-2"><span class="chip bg-racing text-tinta">Parada 1</span><span class="chip bg-boca text-tinta">Parada 2</span><span class="chip bg-ferro text-white">Parada 3</span><span class="chip bg-river text-white">Parada 4</span></div></div>
+          <div class="tarjeta p-6"><h3 class="text-xl">Campos de formulario</h3>
+            <div class="mt-4 space-y-4">
+              <div><label for="ds-ok" class="campo-label">Campo normal</label><input id="ds-ok" class="campo" placeholder="Texto de ejemplo"><p class="campo-ayuda">Texto de ayuda debajo del campo.</p></div>
+              <div><label for="ds-err" class="campo-label">Campo con error</label><input id="ds-err" class="campo" aria-invalid="true" value="nombre@correo" aria-describedby="error-ds-err"><p id="error-ds-err" class="campo-error"><span aria-hidden="true">⚠</span><span>El correo no tiene un formato válido.</span></p></div>
+            </div></div>
+          <div class="tarjeta p-6"><h3 class="text-xl">Estados y foco</h3><p class="mt-1 text-sm text-tinta-suave">Todo elemento interactivo muestra un contorno verde de 3 px al navegar con teclado. Probá con Tab.</p>
+            <p class="mt-4 rounded-xl border-2 border-exito bg-exito-fondo p-3 font-semibold text-exito">✓ Mensaje de éxito</p>
+            <p class="mt-3 rounded-xl border-2 border-error bg-error-fondo p-3 font-semibold text-error">⚠ Mensaje de error</p></div>
+        </div>
+      </section>
+      <section aria-labelledby="ds-grilla"><h2 id="ds-grilla" class="titulo-seccion">Grilla y responsive</h2>
+        <p class="bajada">Mobile first: una columna en celular, dos en tablet (≥768 px) y hasta cuatro en escritorio (≥1024 px). Contenedor máximo de 1152 px con márgenes de 16 a 32 px. Bordes redondeados de 16 px en tarjetas.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="mt-20 bg-tinta text-slate-200">
+    <div class="contenedor grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <div class="flex items-center gap-2 text-white"><svg class="size-10 shrink-0" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+  <circle cx="24" cy="24" r="22" fill="#14532d"/>
+  <path d="M9 33 C 16 22, 26 34, 39 15" fill="none" stroke="#f5b800" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6"/>
+  <circle cx="24" cy="24" r="9" fill="#fff"/>
+  <path d="M24 18.5l4.6 3.3-1.8 5.4h-5.6l-1.8-5.4z" fill="#0f172a"/>
+  <circle cx="39" cy="15" r="3.5" fill="#c8102e" stroke="#fff" stroke-width="1.5"/>
+</svg><span class="font-display text-xl font-black">RUTA GOL</span></div>
+        <p class="mt-3 text-sm">Cuatro estadios de Buenos Aires y Avellaneda como parte de una misma experiencia urbana.</p>
+      </div>
+      <nav aria-label="Estadios del recorrido">
+        <h2 class="font-display text-base font-extrabold text-white">Paradas</h2>
+        <ol class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:underline" href="cilindro.html">1. El Cilindro — Racing</a></li>
+          <li><a class="hover:underline" href="bombonera.html">2. La Bombonera — Boca</a></li>
+          <li><a class="hover:underline" href="ferro.html">3. El Templo de Caballito — Ferro</a></li>
+          <li><a class="hover:underline" href="monumental.html">4. Más Monumental — River</a></li>
+        </ol>
+      </nav>
+      <nav aria-label="Secciones del sitio">
+        <h2 class="font-display text-base font-extrabold text-white">El sitio</h2>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:underline" href="index.html#recorrido">Mapa del recorrido</a></li>
+          <li><a class="hover:underline" href="reservas.html">Reservar una experiencia</a></li>
+          <li><a class="hover:underline" href="index.html#preguntas">Preguntas frecuentes</a></li>
+          <li><a class="hover:underline" href="contacto.html">Contacto</a></li>
+          <li><a class="hover:underline" href="design-system.html">Design System</a></li>
+        </ul>
+      </nav>
+      <div class="text-sm">
+        <h2 class="font-display text-base font-extrabold text-white">Proyecto académico</h2>
+        <p class="mt-3">Diseño y Desarrollo Web · Grupo 9: Tomás Zanetta, Lucas Pistolesi, Mateo Marchetti y Tomás Martinez Menghi.</p>
+        <p class="mt-2">Precios y reservas simulados. Fotos: Wikimedia Commons (créditos en cada imagen). Mapas: © OpenStreetMap.</p>
+      </div>
+    </div>
+    <p class="border-t border-slate-700 py-4 text-center text-xs">© <span id="anio">2026</span> Ruta Gol · Sitio sin fines comerciales, no afiliado a los clubes.</p>
+  </footer>
+
+  <div class="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
+    <section id="panel-asistente" role="dialog" aria-modal="false" aria-labelledby="titulo-asistente" class="flex h-[min(32rem,75vh)] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-borde bg-fondo shadow-2xl" hidden>
+      <div class="flex items-center justify-between gap-2 bg-cancha px-4 py-3 text-white">
+        <div>
+          <h2 id="titulo-asistente" class="font-display text-lg font-extrabold">Asistente Ruta Gol</h2>
+          <p class="text-xs text-cancha-claro">Respuestas automáticas a preguntas frecuentes</p>
+        </div>
+        <button type="button" data-cerrar class="grid size-11 place-items-center rounded-full hover:bg-white/15" aria-label="Cerrar asistente">
+          <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="chat-mensajes" class="flex flex-1 flex-col gap-2 overflow-y-auto p-3" role="log" aria-live="polite" aria-label="Conversación"></div>
+      <form class="flex gap-2 border-t border-borde bg-white p-3" novalidate>
+        <label for="chat-entrada" class="sr-only">Escribí tu pregunta</label>
+        <input id="chat-entrada" type="text" autocomplete="off" maxlength="200" class="campo min-h-11 flex-1" placeholder="Ej.: ¿cuánto cuesta?">
+        <button type="submit" class="btn-primario px-4">Enviar</button>
+      </form>
+    </section>
+    <button id="btn-asistente" type="button" class="btn-primario shadow-lg" aria-expanded="false" aria-controls="panel-asistente">
+      <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4z"/></svg><span>¿Dudas? Preguntá</span>
+    </button>
+  </div>
+</body>
+</html>
