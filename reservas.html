@@ -11,9 +11,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/pago.css">
   <script src="js/datos.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/validacion.js" defer></script>
+  <script src="js/pago.js" defer></script>
   <script src="js/reservas.js" defer></script>
   <script src="js/asistente.js" defer></script>
 </head>
@@ -69,6 +71,7 @@
           <li><span class="mr-1 inline-grid size-6 place-items-center rounded-full bg-white text-cancha">1</span> Elegí y completá</li>
           <li><span class="mr-1 inline-grid size-6 place-items-center rounded-full bg-white text-cancha">2</span> Revisá el resumen</li>
           <li><span class="mr-1 inline-grid size-6 place-items-center rounded-full bg-white text-cancha">3</span> Confirmá la solicitud</li>
+          <li><span class="mr-1 inline-grid size-6 place-items-center rounded-full bg-white text-cancha">4</span> Pagá (simulado)</li>
         </ol>
       </div>
     </section>
@@ -78,9 +81,21 @@
 
       <div id="exito-reserva" class="tarjeta mx-auto max-w-2xl border-2 border-exito bg-exito-fondo p-8 text-center" tabindex="-1" role="status" hidden>
         <span class="mx-auto grid size-16 place-items-center rounded-full bg-exito text-white"><svg class="size-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l5 5L20 7"/></svg></span>
-        <h2 class="mt-4 text-3xl">Solicitud registrada</h2>
+        <h2 class="mt-4 text-3xl" data-titulo>Reserva confirmada</h2>
         <p class="mt-2">Código de reserva: <strong class="font-display text-2xl" data-codigo></strong></p>
         <p class="mt-3" data-detalle></p>
+
+        <div class="mt-6 rounded-xl bg-fondo p-4 text-sm text-left" data-comprobante hidden>
+          <h3 class="font-sans text-base font-bold">Comprobante del pago simulado</h3>
+          <dl class="mt-2 space-y-1">
+            <div class="flex justify-between"><dt>Medio de pago</dt><dd class="font-semibold" data-pago-medio></dd></div>
+            <div class="flex justify-between"><dt>Importe cobrado</dt><dd class="font-semibold" data-pago-importe></dd></div>
+            <div class="flex justify-between"><dt>N° de operación</dt><dd class="font-semibold" data-pago-operacion></dd></div>
+            <div class="flex justify-between"><dt>Estado</dt><dd class="font-semibold" data-pago-estado></dd></div>
+          </dl>
+          <p class="mt-2 text-tinta-suave">Ningún cobro fue real: el checkout es una simulación del proyecto.</p>
+        </div>
+
         <div class="mt-6 flex flex-wrap justify-center gap-3">
           <button type="button" id="btn-nueva" class="btn-secundario">Hacer otra reserva</button>
           <a href="index.html#recorrido" class="btn-primario">Ver el recorrido</a>
@@ -207,8 +222,29 @@
         <div id="dialogo-contenido" class="mt-5"></div>
         <div class="mt-6 flex flex-wrap justify-end gap-3">
           <button type="button" id="btn-editar" class="btn-secundario">Volver y editar</button>
-          <button type="button" id="btn-confirmar" class="btn-primario">Confirmar solicitud</button>
+          <button type="button" id="btn-confirmar" class="btn-primario">Ir a pagar</button>
         </div>
+      </div>
+    </dialog>
+
+    <!-- Checkout simulado: el contenido de cada paso lo arma js/pago.js -->
+    <dialog id="dialogo-pago" class="pago-dialogo" aria-labelledby="titulo-pago">
+      <div class="pago-cabecera">
+        <span class="pago-marca" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h3"/></svg>
+        </span>
+        <h2 id="titulo-pago">Pagar la reserva</h2>
+        <button type="button" class="pago-cerrar" data-cerrar-pago aria-label="Cerrar el pago y volver a la reserva">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <p class="pago-aviso">⚠ Checkout simulado con fines académicos: no es una pasarela de pago real, no se cobra nada y solo se aceptan tarjetas de prueba.</p>
+      <div class="pago-cuerpo">
+        <dl class="pago-importe">
+          <dt>Total a pagar</dt>
+          <dd id="pago-total">$ 0,00</dd>
+        </dl>
+        <div id="pago-contenido"></div>
       </div>
     </dialog>
   </main>

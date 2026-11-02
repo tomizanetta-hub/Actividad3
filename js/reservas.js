@@ -287,19 +287,46 @@ function revisarReserva(e) {
   document.getElementById("dialogo-reserva").showModal();
 }
 
+// Del resumen se pasa al checkout simulado (js/pago.js). Si ese archivo no
+// estuviera disponible, la reserva se registra igual sin el paso de pago.
 function confirmarReserva() {
   const r = calcular();
-  const codigo = "RG-" + Date.now().toString(36).slice(-5).toUpperCase();
   document.getElementById("dialogo-reserva").close();
+
+  if (typeof PagoSimulado === "undefined") return mostrarExito(r, null);
+
+  PagoSimulado.abrir({
+    totalARS: r.totalARS,
+    onAprobado: (pago) => mostrarExito(r, pago),
+  });
+}
+
+function mostrarExito(r, pago) {
+  const codigo = "RG-" + Date.now().toString(36).slice(-5).toUpperCase();
   const form = document.getElementById("form-reserva");
   const nombre = form["nombre-reserva"].value.trim().split(" ")[0];
   const email = form["email-reserva"].value.trim();
+  const pendiente = pago?.respuesta.estado === "pendiente";
 
   const exito = document.getElementById("exito-reserva");
+  exito.querySelector("[data-titulo]").textContent = pendiente ? "Pago pendiente de acreditación" : "Reserva confirmada";
   exito.querySelector("[data-codigo]").textContent = codigo;
   exito.querySelector("[data-detalle]").textContent =
-    `¡Listo, ${nombre}! Tu solicitud del paquete ${r.paquete.nombre} para ${r.personas} persona(s) por ${formatoUSD.format(r.totalUSD / 100)} ` +
+    `¡Listo, ${nombre}! Tu reserva del paquete ${r.paquete.nombre} para ${r.personas} persona(s) por ${formatoUSD.format(r.totalUSD / 100)} ` +
     `(${formatoARS.format(r.totalARS / 100)}) quedó registrada. En un sitio real recibirías la confirmación en ${email}.`;
+
+  // Comprobante del pago simulado (solo si se pasó por el checkout)
+  const comprobante = exito.querySelector("[data-comprobante]");
+  comprobante.hidden = !pago;
+  if (pago) {
+    comprobante.querySelector("[data-pago-medio]").textContent =
+      pago.etiquetaMedio + (pago.ultimos4 ? ` ••••${pago.ultimos4}` : "");
+    comprobante.querySelector("[data-pago-importe]").textContent =
+      formatoARS.format(pago.totalCobrado / 100) + (pago.cuotas > 1 ? ` en ${pago.cuotas} cuotas` : "");
+    comprobante.querySelector("[data-pago-operacion]").textContent = pago.idOperacion;
+    comprobante.querySelector("[data-pago-estado]").textContent = pendiente ? "Pendiente de acreditación" : "Aprobado";
+  }
+
   form.hidden = true;
   document.getElementById("columna-resumen").hidden = true;
   exito.hidden = false;
