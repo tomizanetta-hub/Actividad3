@@ -230,6 +230,9 @@
     <!-- Checkout simulado: el contenido de cada paso lo arma js/pago.js -->
     <dialog id="dialogo-pago" class="pago-dialogo" aria-labelledby="titulo-pago">
       <div class="pago-cabecera">
+        <button type="button" class="pago-atras" data-atras aria-label="Volver al paso anterior del pago" hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
         <span class="pago-marca" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h3"/></svg>
         </span>
@@ -238,7 +241,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
       </div>
-      <p class="pago-aviso">⚠ Checkout simulado con fines académicos: no es una pasarela de pago real, no se cobra nada y solo se aceptan tarjetas de prueba.</p>
+      <p class="pago-aviso">⚠ Checkout simulado con fines académicos: no es una pasarela de pago real y no se cobra nada. No cargues los datos de una tarjeta tuya.</p>
       <div class="pago-cuerpo">
         <dl class="pago-importe">
           <dt>Total a pagar</dt>

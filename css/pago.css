@@ -16,8 +16,13 @@
 }
 
 /* ---------- Contenedor ---------- */
+/* La cabecera y el aviso quedan fijos y el cuerpo es lo que scrollea,
+   así el checkout entra en pantallas bajas sin recortar el formulario. */
 .pago-dialogo {
+  display: flex;
+  flex-direction: column;
   width: min(30rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
   margin: auto;
   padding: 0;
   border: none;
@@ -25,6 +30,8 @@
   overflow: hidden;
   color: var(--pago-texto);
 }
+.pago-dialogo > .pago-cabecera,
+.pago-dialogo > .pago-aviso { flex-shrink: 0; }
 .pago-dialogo::backdrop { background: rgb(15 23 42 / 0.6); }
 
 .pago-cabecera {
@@ -46,19 +53,23 @@
   background: #fff;
   color: var(--pago-azul-osc);
 }
-.pago-cerrar {
+.pago-cerrar,
+.pago-atras {
   display: grid;
   place-items: center;
   width: 2.75rem;
   height: 2.75rem;
-  margin-left: auto;
+  flex-shrink: 0;
   border: none;
   border-radius: 9999px;
   background: transparent;
   color: #fff;
   cursor: pointer;
 }
-.pago-cerrar:hover { background: rgb(255 255 255 / 0.18); }
+.pago-cerrar { margin-left: auto; }
+.pago-atras { margin-left: -0.5rem; }
+.pago-cerrar:hover,
+.pago-atras:hover { background: rgb(255 255 255 / 0.18); }
 
 .pago-aviso {
   padding: 0.625rem 1.25rem;
@@ -69,7 +80,14 @@
   color: #6b4e00;
 }
 
-.pago-cuerpo { padding: 1.25rem; background: #fff; }
+.pago-cuerpo {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.25rem;
+  background: #fff;
+}
 
 /* ---------- Importe a pagar ---------- */
 .pago-importe {

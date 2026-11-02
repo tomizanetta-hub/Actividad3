@@ -40,6 +40,8 @@ const PagoSimulado = (() => {
 
   // Datos de la reserva en curso y callback de éxito
   let ctx = null;
+  // Paso al que lleva la flecha de la cabecera (null = no se puede volver)
+  let pasoAnterior = null;
 
   /* ---------- Apertura y navegación entre pasos ---------- */
 
@@ -52,9 +54,12 @@ const PagoSimulado = (() => {
     pasoMedios();
   }
 
-  function pintar(html) {
+  function pintar(html, anterior) {
     const cont = document.getElementById("pago-contenido");
     cont.innerHTML = html;
+    cont.closest(".pago-cuerpo").scrollTop = 0; // cada paso arranca arriba
+    pasoAnterior = anterior || null;
+    document.querySelector("#dialogo-pago [data-atras]").hidden = !pasoAnterior;
     cont.querySelector("[data-foco]")?.focus();
     return cont;
   }
@@ -86,7 +91,7 @@ const PagoSimulado = (() => {
           <span class="pago-medio-flecha" aria-hidden="true">${ICONO_FLECHA}</span>
         </button></li>
       </ul>
-      <button type="button" class="pago-boton pago-boton-secundario" data-volver style="margin-top:1rem">Volver a la reserva</button>`);
+      <button type="button" class="pago-boton pago-boton-secundario" data-volver style="margin-top:1rem">Volver a la reserva</button>`, null);
 
     cont.querySelectorAll("[data-medio]").forEach((b) => {
       b.addEventListener("click", () => {
@@ -117,14 +122,14 @@ const PagoSimulado = (() => {
       <form class="pago-form" id="pago-form" novalidate>
         <div class="pago-campo">
           <label for="pago-numero">Número de la tarjeta</label>
-          <input id="pago-numero" name="numero" type="text" inputmode="numeric" autocomplete="off" maxlength="19" placeholder="0000 0000 0000 0000" aria-describedby="pago-error-numero">
+          <input id="pago-numero" name="numero" type="text" inputmode="numeric" autocomplete="off" maxlength="19" placeholder="0000 0000 0000 0000" aria-describedby="pago-ayuda-numero pago-error-numero">
+          <p class="pago-ayuda" id="pago-ayuda-numero">Es una simulación: no uses una tarjeta real. Abajo tenés tarjetas de prueba.</p>
           <p class="pago-error" id="pago-error-numero" aria-live="polite"></p>
         </div>
 
         <div class="pago-campo">
           <label for="pago-titular">Nombre del titular, como figura en la tarjeta</label>
-          <input id="pago-titular" name="titular" type="text" autocomplete="off" maxlength="40" placeholder="APRO Pistolesi" aria-describedby="pago-ayuda-titular pago-error-titular">
-          <p class="pago-ayuda" id="pago-ayuda-titular">Escribí <strong>APRO</strong> para simular un pago aprobado.</p>
+          <input id="pago-titular" name="titular" type="text" autocomplete="off" maxlength="40" placeholder="APRO Perez" aria-describedby="pago-error-titular">
           <p class="pago-error" id="pago-error-titular" aria-live="polite"></p>
         </div>
 
@@ -161,14 +166,14 @@ const PagoSimulado = (() => {
       <details class="pago-pruebas">
         <summary>Ver tarjetas de prueba (ninguna es real)</summary>
         <div class="pago-pruebas-cuerpo">
-          <p class="pago-ayuda" style="margin:0">Tocá una para completar el formulario. El resultado depende del nombre del titular: <strong>APRO</strong> aprueba, <strong>FUND</strong>, <strong>SECU</strong>, <strong>EXPI</strong> y <strong>OTHE</strong> rechazan, <strong>CONT</strong> deja el pago pendiente.</p>
+          <p class="pago-ayuda" style="margin:0">Tocá una para completar el formulario. El resultado lo decide el nombre del titular: <strong>APRO</strong> aprueba, <strong>FUND</strong>, <strong>SECU</strong>, <strong>EXPI</strong> y <strong>OTHE</strong> rechazan, <strong>CONT</strong> deja el pago pendiente.</p>
           ${TARJETAS_PRUEBA.map((t, i) => `
             <button type="button" class="pago-prueba" data-prueba="${i}">
               <span><strong>${t.etiqueta}</strong><br><code>${agrupar(t.numero, t.marca)}</code></span>
               <span>CVV ${t.cvv} · ${t.venc}</span>
             </button>`).join("")}
         </div>
-      </details>`);
+      </details>`, pasoMedios);
 
     const form = cont.querySelector("#pago-form");
     const numero = form.numero;
@@ -202,7 +207,7 @@ const PagoSimulado = (() => {
         form.cvv.value = t.cvv;
         form.venc.value = t.venc;
         form.dni.value = "12345678";
-        if (!form.titular.value) form.titular.value = "APRO PISTOLESI";
+        if (!form.titular.value) form.titular.value = "APRO PEREZ";
         dibujarTarjeta(form);
         form.titular.focus();
       });
@@ -268,7 +273,7 @@ const PagoSimulado = (() => {
       <div class="pago-resultado-acciones">
         <button type="button" class="pago-boton" data-pagar ${alcanza ? "" : "disabled"}>Pagar ${formatoARS.format(ctx.totalARS / 100)}</button>
         <button type="button" class="pago-boton pago-boton-secundario" data-volver>Cambiar medio de pago</button>
-      </div>`);
+      </div>`, pasoMedios);
 
     cont.querySelector("[data-volver]").addEventListener("click", pasoMedios);
     cont.querySelector("[data-pagar]").addEventListener("click", () => procesar({
@@ -285,7 +290,6 @@ const PagoSimulado = (() => {
   function validarTarjeta(form) {
     const limpio = soloDigitos(form.numero.value);
     const marca = detectarMarca(limpio);
-    const esPrueba = TARJETAS_PRUEBA.some((t) => t.numero === limpio);
     const errores = [];
 
     const revisar = (campo, mensaje) => {
@@ -295,11 +299,10 @@ const PagoSimulado = (() => {
       if (mensaje) errores.push(campo);
     };
 
-    revisar(form.numero,
-      !limpio ? "Escribí el número de la tarjeta."
-      : !luhn(limpio) ? "El número no es válido: revisá que no falte ningún dígito."
-      : !esPrueba ? "Por seguridad solo se aceptan las tarjetas de prueba de la lista de abajo. No cargues una tarjeta real."
-      : "");
+    // El número solo tiene que estar completo: al ser una simulación no se
+    // valida el dígito verificador ni se exige una tarjeta de prueba, así
+    // cualquier número sirve para mostrar el flujo.
+    revisar(form.numero, limpio ? "" : "Escribí el número de la tarjeta.");
 
     revisar(form.titular,
       !form.titular.value.trim() ? "Escribí el nombre del titular."
@@ -334,20 +337,6 @@ const PagoSimulado = (() => {
     const ultimoDia = new Date(anio, mes, 0);
     if (ultimoDia < hoy) return "La tarjeta está vencida.";
     return "";
-  }
-
-  // Algoritmo de Luhn: verifica el dígito de control del número de tarjeta
-  function luhn(numero) {
-    if (numero.length < 13) return false;
-    let suma = 0;
-    let doble = false;
-    for (let i = numero.length - 1; i >= 0; i--) {
-      let d = Number(numero[i]);
-      if (doble) d = d * 2 > 9 ? d * 2 - 9 : d * 2;
-      suma += d;
-      doble = !doble;
-    }
-    return suma % 10 === 0;
   }
 
   // Primero se busca entre las tarjetas de prueba (alguna usa un rango que no
@@ -398,7 +387,7 @@ const PagoSimulado = (() => {
         <div class="pago-spinner" aria-hidden="true"></div>
         <p><strong>Procesando el pago…</strong></p>
         <p class="pago-ayuda">Estamos confirmando la operación con el emisor. No cierres esta ventana.</p>
-      </div>`);
+      </div>`, null);
     setTimeout(() => pasoResultado(pago), 1800);
   }
 
@@ -430,7 +419,7 @@ const PagoSimulado = (() => {
         <p>${r.detalle}</p>
         ${r.estado === "rechazado" ? "" : detalle}
         <div class="pago-resultado-acciones">${acciones}</div>
-      </div>`);
+      </div>`, r.estado === "rechazado" ? pasoMedios : null);
 
     cont.querySelector("[data-reintentar]")?.addEventListener("click", pasoMedios);
     cont.querySelector("[data-cerrar]")?.addEventListener("click", cerrar);
@@ -455,6 +444,7 @@ const PagoSimulado = (() => {
     const dialogo = document.getElementById("dialogo-pago");
     if (!dialogo) return;
     dialogo.querySelector("[data-cerrar-pago]").addEventListener("click", cerrar);
+    dialogo.querySelector("[data-atras]").addEventListener("click", () => pasoAnterior?.());
     // Mientras se procesa el pago no se puede cerrar con Escape (evita dejarlo a medias)
     dialogo.addEventListener("cancel", (e) => {
       if (dialogo.querySelector(".pago-procesando")) e.preventDefault();
