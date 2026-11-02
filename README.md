@@ -5,7 +5,7 @@ Trabajo práctico de **Diseño y Desarrollo Web — Actividad 3 — Grupo 9**.
 
 | | |
 |---|---|
-| 🌐 **Sitio desplegado** | https://tomizanetta-hub.github.io/Actividad3/ *(actualizar si cambia el nombre del repo)* |
+| 🌐 **Sitio desplegado** | https://tomizanetta-hub.github.io/Actividad3/ |
 | 🎨 **Prototipo en Figma** | https://www.figma.com/design/PYDJ3V7DwH0qmrgeVP71H9/Ruta-Gol---Grupo-9?node-id=2-2 |
 | 🧩 **Design System** | Figma (enlace anterior) y versión implementada en [`design-system.html`](https://tomizanetta-hub.github.io/Actividad3/design-system.html) |
 
@@ -30,7 +30,8 @@ Ayudar a los visitantes a planificar una experiencia informada: elegir qué esta
 - **Página principal:** presentación, propuesta de valor, mapa del recorrido, acceso a las cuatro paradas, paquetes y promociones, recomendaciones y preguntas frecuentes.
 - **Fichas de cada estadio:** historia y arquitectura, actividades, datos para la visita (ubicación, horarios, duración, acceso), mapa, galería con créditos, recomendaciones y navegación a la parada anterior/siguiente.
 - **Mapa interactivo:** paradas numeradas con el color de cada club, unidas en el orden sugerido; la lista lateral centra el mapa en cada parada.
-- **Reserva de experiencia (simulada):** elección de paquete, fecha, adultos y menores, servicios adicionales; cálculo automático del total en USD, descuento grupal y **conversión a pesos con el dólar oficial del día** (se muestran valor, fuente y fecha); resumen para revisar antes de confirmar y código de reserva.
+- **Reserva de experiencia (simulada):** elección de paquete, fecha, adultos y menores, servicios adicionales; cálculo automático del total en USD, descuento grupal y **conversión a pesos con el dólar oficial del día** (se muestran valor, fuente y fecha); resumen para revisar antes de confirmar.
+- **Checkout de pago simulado:** medio de pago, tarjeta de prueba, cuotas y resultado (aprobado, rechazado o pendiente), con comprobante y código de reserva. No cobra nada y solo acepta tarjetas de prueba.
 - **Formulario de contacto (simulado):** nombre, correo, motivo y mensaje, con validación en vivo, resumen de errores y confirmación de envío.
 - **Asistente de preguntas frecuentes:** chat disponible en todas las páginas que responde según palabras clave, con preguntas sugeridas; y buscador de preguntas frecuentes en la home.
 - **Accesibilidad:** enlace "Saltar al contenido", navegación completa con teclado, foco visible, etiquetas en todos los campos, errores con ícono y texto, `alt` en todas las imágenes, contraste AA.
@@ -65,6 +66,7 @@ Ayudar a los visitantes a planificar una experiencia informada: elegir qué esta
 ├── design-system.html    Design System implementado
 ├── src/input.css         Fuente de Tailwind: tokens y componentes
 ├── css/styles.css        CSS compilado (lo que usa el sitio)
+├── css/pago.css          Estilos del diálogo de pago simulado
 ├── js/
 │   ├── datos.js          Estadios, paquetes, precios y reglas
 │   ├── main.js           Menú móvil, imágenes de respaldo, utilidades
@@ -72,7 +74,8 @@ Ayudar a los visitantes a planificar una experiencia informada: elegir qué esta
 │   ├── validacion.js     Funciones de validación compartidas
 │   ├── reservas.js       Cálculo, tipo de cambio y confirmación
 │   ├── contacto.js       Formulario de contacto
-│   └── asistente.js      Chat y preguntas frecuentes
+│   ├── asistente.js      Chat y preguntas frecuentes
+│   └── pago.js           Checkout de pago simulado
 ├── img/logo.svg          Logo / favicon
 └── vendor/leaflet/       Biblioteca Leaflet
 ```
@@ -90,14 +93,12 @@ Ayudar a los visitantes a planificar una experiencia informada: elegir qué esta
 
 ## Integrantes y contribuciones
 
-| Integrante | Contribución |
-|---|---|
-| **Tomás Zanetta** | Página de El Cilindro (`cilindro.html`). Configuración del repositorio y publicación en GitHub Pages. Página principal y mapa del recorrido (`index.html`, `js/mapa.js`). |
-| **Lucas Pistolesi** | Página de La Bombonera (`bombonera.html`). Formulario de reserva, cálculo de precios y conversión de moneda (`reservas.html`, `js/reservas.js`, `js/datos.js`). |
-| **Tomás Martinez Menghi** | Página de Ferro (`ferro.html`). Formulario de contacto y validaciones (`contacto.html`, `js/contacto.js`, `js/validacion.js`). |
-| **Mateo Marchetti** | Página del Más Monumental (`monumental.html`). Asistente de preguntas frecuentes y Design System (`js/asistente.js`, `design-system.html`, `src/input.css`). |
-
-> *Editar esta tabla para que coincida con lo que hizo realmente cada uno y con el historial de commits.*
+| Integrante | Usuario | Contribución |
+|---|---|---|
+| **Tomás Zanetta** | tomizanetta-hub | Creación del repositorio y publicación en GitHub Pages. Estructura base, Tailwind y Design System (`css/`, `src/`, `img/`, `vendor/`). Funciones JavaScript comunes (`js/`). Página principal y ficha de El Cilindro (`index.html`, `cilindro.html`). Corrección de la foto del Más Monumental. |
+| **Lucas Pistolesi** | lPisto | Ficha de La Bombonera (`bombonera.html`). Formulario de reserva (`reservas.html`) y checkout de pago simulado (`js/pago.js`, `css/pago.css`, ajustes en `js/reservas.js`). Actualización del tipo de cambio de respaldo (`js/datos.js`). |
+| **Tomás Martinez Menghi** | Tomasmartinezmenghi | Ficha de Ferro (`ferro.html`). Formulario de contacto (`contacto.html`). |
+| **Mateo Marchetti** | marchettimateo22-dotcom | Ficha del Más Monumental (`monumental.html`). Página de Design System (`design-system.html`). README del proyecto. |
 
 ## Créditos y aclaraciones
 
